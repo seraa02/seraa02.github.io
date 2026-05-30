@@ -13,16 +13,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <link rel="stylesheet" href="style.css">
 
-  <style>
+    <style>
   /* ═══════════════════════════════════════════
-     PINK THEME — exact #ffc5cb from style.css
+     PINK THEME OVERRIDES — mobile fixes now in style.css
   ═══════════════════════════════════════════ */
-  .one-third {
-    z-index: 0 !important;
-    background-color: #fde8ed;
-  }
+
+  .one-third { background-color: #fde8ed; }
   .one-third.js-fullheight { min-height: 750px; height: 750px; }
-  .one-forth { z-index: 2 !important; }
 
   .skill-mf .pull-right { display: none; }
 
@@ -39,93 +36,55 @@
   .resume-wrap ul { margin-top: 8px; }
   .resume-wrap ul li { margin-bottom: 4px; font-size: 13.5px; }
   .exp-col { padding-left: 10px; padding-right: 10px; }
-  .resume-wrap h2 { font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   .about-photo-wrap {
-    width: 100%;
-    height: 100%;
-    min-height: 420px;
-    border-radius: 12px;
-    overflow: hidden;
+    width: 100%; height: 100%; min-height: 420px;
+    border-radius: 12px; overflow: hidden;
     box-shadow: 0 12px 40px rgba(255,197,203,0.45);
     position: relative;
   }
   .about-photo-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    border-radius: 12px;
-    transition: transform 0.4s ease;
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center top; display: block;
+    border-radius: 12px; transition: transform 0.4s ease;
   }
   .about-photo-wrap:hover img { transform: scale(1.03); }
   .about-photo-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    border: 2px solid rgba(255,197,203,0.5);
+    content: ''; position: absolute; inset: 0;
+    border-radius: 12px; border: 2px solid rgba(255,197,203,0.5);
     pointer-events: none;
   }
 
   .proj-banner {
-    height: 190px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform .35s ease;
-    text-decoration: none !important;
-    border-radius: 8px 8px 0 0;
+    height: 190px; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; transition: transform .35s ease;
+    text-decoration: none !important; border-radius: 8px 8px 0 0;
   }
   .proj-banner:hover { transform: scale(1.04); }
   .proj-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.18) 0%, transparent 55%),
                 radial-gradient(circle at 75% 25%, rgba(255,255,255,0.10) 0%, transparent 45%);
     z-index: 0;
   }
   .proj-banner .proj-icon {
-    font-size: 52px;
-    color: rgba(255,255,255,0.93);
-    z-index: 1;
-    text-shadow: 0 3px 18px rgba(0,0,0,0.15);
-    transition: transform .3s ease;
+    font-size: 52px; color: rgba(255,255,255,0.93); z-index: 1;
+    text-shadow: 0 3px 18px rgba(0,0,0,0.15); transition: transform .3s ease;
   }
   .proj-banner:hover .proj-icon { transform: scale(1.14); }
-
   .proj-banner .proj-hover-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    transition: background 0.3s ease;
-    border-radius: 8px 8px 0 0;
+    position: absolute; inset: 0; background: rgba(0,0,0,0);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2; transition: background 0.3s ease; border-radius: 8px 8px 0 0;
   }
   .proj-banner:hover .proj-hover-overlay { background: rgba(0,0,0,0.28); }
   .proj-hover-overlay .proj-hover-text {
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    opacity: 0;
-    transform: translateY(8px);
+    color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; opacity: 0; transform: translateY(8px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: rgba(255,197,203,0.25);
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.35);
+    display: flex; align-items: center; gap: 7px;
+    background: rgba(255,197,203,0.25); padding: 8px 18px;
+    border-radius: 20px; border: 1px solid rgba(255,255,255,0.35);
     backdrop-filter: blur(4px);
   }
   .proj-banner:hover .proj-hover-text { opacity: 1; transform: translateY(0); }
@@ -142,11 +101,9 @@
 
   .proj-tags { margin-top: 8px; }
   .proj-tags .badge {
-    font-size: 10px; font-weight: 500;
-    margin-right: 3px; margin-bottom: 3px;
+    font-size: 10px; font-weight: 500; margin-right: 3px; margin-bottom: 3px;
     padding: 4px 8px; border-radius: 12px;
-    background: #fff0f2; color: #c9506e;
-    border: 1px solid #ffc5cb;
+    background: #fff0f2; color: #c9506e; border: 1px solid #ffc5cb;
   }
 
   .blog-entry { transition: transform .25s ease, box-shadow .25s ease; }
@@ -156,103 +113,8 @@
   .counter-wrap { margin-top: 1rem !important; }
   .proj-row-gap { margin-bottom: 24px; }
 
-
-  /* ═══════════════════════════════════════════
-     MOBILE FIXES
-  ═══════════════════════════════════════════ */
-
-  /* FIX 1: Navbar — hamburger always white/visible on hero */
-  @media (max-width: 991px) {
-    #ftco-navbar {
-      background: rgba(0,0,0,0.6) !important;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-    .navbar-toggler {
-      border-color: rgba(255,255,255,0.5) !important;
-    }
-    /* Force the bars icon white regardless of what style.css does */
-    .navbar-toggler .fas,
-    .js-fh5co-nav-toggle .fas,
-    .fh5co-nav-toggle .fas {
-      color: #ffffff !important;
-    }
-    .navbar-toggler-text {
-      color: #ffffff !important;
-    }
-    /* When user scrolls down and nav gets solid white bg */
-    #ftco-navbar.scrolled,
-    #ftco-navbar.awake {
-      background: rgba(255,255,255,0.97) !important;
-    }
-    #ftco-navbar.scrolled .navbar-toggler .fas,
-    #ftco-navbar.awake .navbar-toggler .fas {
-      color: #333 !important;
-    }
-    /* Mobile dropdown menu */
-    #ftco-nav {
-      background: rgba(15,15,15,0.96);
-      border-radius: 0 0 14px 14px;
-      padding: 4px 12px 16px;
-      margin-top: 4px;
-    }
-    #ftco-nav .nav-link span { color: #fff !important; }
-    #ftco-nav .nav-item { border-bottom: 1px solid rgba(255,197,203,0.15); }
-    #ftco-nav .nav-item:last-child { border-bottom: none; }
-  }
-
-  /* FIX 2: Hero — stop text overlapping image on mobile */
   @media (max-width: 767px) {
-    /* The slider row: stack vertically instead of side-by-side */
-    .home-slider .slider-item .row.slider-text {
-      flex-direction: column !important;
-      min-height: auto !important;
-    }
-
-    /* Image pane: sits at top, smaller height */
-    .one-third.js-fullheight {
-      min-height: 240px !important;
-      height: 240px !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      flex: 0 0 100% !important;
-      order: -1 !important;
-      position: relative !important;
-      z-index: 1 !important;
-    }
-
-    /* Text pane: below the image, white/pink bg so readable */
-    .one-forth {
-      width: 100% !important;
-      max-width: 100% !important;
-      flex: 0 0 100% !important;
-      order: 1 !important;
-      background: #fff8f9 !important;
-      padding: 30px 20px 36px !important;
-      position: relative !important;
-      z-index: 2 !important;
-      min-height: auto !important;
-    }
-    .one-forth .text { padding: 0 !important; }
-    .one-forth .text .subheading { color: #c9506e !important; font-size: 13px !important; }
-    .one-forth .text h1 { color: #1a1a1a !important; font-size: 2rem !important; line-height: 1.2 !important; }
-    .one-forth .text h1 span { color: #c9506e !important; }
-    .one-forth .text > p { color: #555 !important; font-size: 14px !important; }
-    #typing-animation { color: #c9506e !important; }
-
-    /* Prevent hero section from being too tall */
-    .hero, #home-section { min-height: auto !important; }
-    .home-slider .owl-stage-outer,
-    .home-slider .owl-stage,
-    .home-slider .owl-item { height: auto !important; }
-    .home-slider .slider-item { height: auto !important; min-height: auto !important; }
-  }
-
-  /* FIX 3: Resume section background & cards on mobile */
-  @media (max-width: 767px) {
-    #resume-section {
-      background: #fff8f9 !important;
-    }
+    #resume-section { background: #fff8f9 !important; }
     .resume-wrap {
       border-left: 4px solid #ffc5cb !important;
       background: #ffffff !important;
@@ -260,46 +122,15 @@
       border-radius: 0 8px 8px 0 !important;
       padding: 16px 18px !important;
     }
-    /* Allow long education titles to wrap */
-    .resume-wrap h2 {
-      white-space: normal !important;
-      font-size: 15px !important;
-      line-height: 1.35 !important;
-    }
-    /* Stack experience cols */
-    .exp-col {
-      padding-left: 15px !important;
-      padding-right: 15px !important;
-    }
-    /* Section big watermark text */
+    .resume-wrap h2 { white-space: normal !important; font-size: 15px !important; line-height: 1.35 !important; }
+    .exp-col { padding-left: 15px !important; padding-right: 15px !important; }
+    .about-photo-wrap { min-height: 300px !important; height: 300px !important; margin-bottom: 28px; }
     .big-2 { font-size: 4.5rem !important; }
     .big-4 { font-size: 1.8rem !important; }
   }
 
-  /* FIX 4: About photo height on mobile */
-  @media (max-width: 767px) {
-    .about-photo-wrap {
-      min-height: 300px !important;
-      height: 300px !important;
-      margin-bottom: 28px;
-    }
-  }
-
-  /* FIX 5: Project cards — single column on xs */
   @media (max-width: 575px) {
-    .proj-row-gap .col-md-4 {
-      flex: 0 0 100%;
-      max-width: 100%;
-      margin-bottom: 20px;
-    }
-  }
-
-  /* FIX 6: General mobile polish */
-  @media (max-width: 767px) {
-    body { font-size: 15px; }
-    .ftco-section { padding: 3em 0; }
-    .heading-section h2 { font-size: 1.5rem; }
-    .container { padding-left: 16px; padding-right: 16px; }
+    .proj-row-gap .col-md-4 { flex: 0 0 100%; max-width: 100%; margin-bottom: 20px; }
   }
   </style>
 </head>

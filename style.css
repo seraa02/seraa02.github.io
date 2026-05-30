@@ -1,6 +1,5 @@
 /* =============================================
    SAHER THEKEDAR - PORTFOLIO CUSTOM STYLES
-   (Bootstrap loaded via CDN, only custom rules here)
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
@@ -95,7 +94,7 @@ a:hover { text-decoration: none; }
 
 .ftco-navbar-light .navbar-toggler {
   border: none;
-  color: #000;
+  color: #fff;
   cursor: pointer;
   text-transform: uppercase;
   font-size: 14px;
@@ -108,14 +107,16 @@ a:hover { text-decoration: none; }
 .ftco-navbar-light.scrolled {
   position: fixed;
   top: 0;
-  background: #000 !important;
+  background: #1a0a0e !important;
   padding: 5px 0;
-  box-shadow: 0 0 10px rgba(0,0,0,.15);
+  box-shadow: 0 0 10px rgba(0,0,0,.3);
   margin-top: -80px;
 }
 .ftco-navbar-light.scrolled .nav-item > .nav-link { color: #fff !important; }
 .ftco-navbar-light.scrolled .nav-item.active > .nav-link { color: #ffc5cb !important; }
-.ftco-navbar-light.scrolled .navbar-brand { color: #fff; }
+.ftco-navbar-light.scrolled .navbar-brand { color: #fff !important; }
+.ftco-navbar-light.scrolled .navbar-toggler { color: #fff !important; }
+.ftco-navbar-light.scrolled .navbar-toggler .fas { color: #fff !important; }
 
 .ftco-navbar-light.scrolled.awake {
   margin-top: 0;
@@ -126,11 +127,23 @@ a:hover { text-decoration: none; }
 }
 
 @media (max-width: 991.98px) {
-  .ftco-navbar-light .navbar-collapse {
-    background: #fff;
-    padding: 10px 20px;
+  /* Navbar always dark on mobile so hamburger is always visible */
+  .ftco-navbar-light {
+    background: rgba(0,0,0,0.55) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
-  .ftco-navbar-light.scrolled .navbar-collapse { background: #111; }
+  .ftco-navbar-light .navbar-brand { color: #fff !important; }
+  .ftco-navbar-light .navbar-toggler { color: #fff !important; border-color: rgba(255,255,255,0.4) !important; }
+  .ftco-navbar-light .navbar-toggler .fas { color: #fff !important; }
+
+  .ftco-navbar-light .navbar-collapse {
+    background: rgba(15,5,8,0.96);
+    padding: 10px 20px;
+    border-radius: 0 0 12px 12px;
+  }
+  .ftco-navbar-light .navbar-collapse .nav-link span { color: #fff !important; }
+  .ftco-navbar-light.scrolled .navbar-collapse { background: #1a0a0e; }
   .ftco-navbar-light.scrolled .nav-item > .nav-link {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -217,7 +230,7 @@ a:hover { text-decoration: none; }
   }
 }
 
-/* Slider text styles */
+/* Slider text styles — DESKTOP */
 .slider-text .subheading {
   color: #ffc5cb;
   font-weight: 600;
@@ -234,11 +247,122 @@ a:hover { text-decoration: none; }
   font-weight: 800;
 }
 .slider-text h1 span { color: #ffc5cb; font-weight: 800; }
+
 @media (max-width: 991.98px) {
   .slider-text { text-align: center; }
   .slider-text h1 { font-size: 50px; color: #000; }
 }
-@media (max-width: 767.98px) { .slider-text h1 { font-size: 40px; } }
+@media (max-width: 767.98px) {
+  .slider-text h1 { font-size: 40px; }
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE HERO — full override below 768px
+   Hides the photo, shows gradient bg + dark pink text
+══════════════════════════════════════════════ */
+@media (max-width: 767.98px) {
+
+  /* Carousel & slider: auto height */
+  .owl-carousel.home-slider,
+  .owl-carousel.home-slider .slider-item,
+  .slider-text {
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+
+  /* Whole slider item = pink gradient background */
+  .owl-carousel.home-slider .slider-item {
+    background: linear-gradient(160deg, #fff0f3 0%, #fde8ed 45%, #ffc5cb 100%) !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Hide the bg_1.jpg photo pane — this is what caused the overlap */
+  .one-third.js-fullheight {
+    display: none !important;
+  }
+
+  /* Text pane: full width, static (NOT absolute), centered */
+  .one-forth {
+    position: relative !important;  /* KEY: removes the absolute overlay */
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    background: transparent !important;
+    padding: 0 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 100vh !important;
+    z-index: 2 !important;
+  }
+
+  .one-forth .text {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: static !important;   /* removes the desktop transform trick */
+    transform: none !important;
+    text-align: center !important;
+    padding: 0 !important;
+  }
+
+  /* "HOWDY!" subheading */
+  .slider-text .subheading {
+    color: #8b2040 !important;
+    font-size: 12px !important;
+    letter-spacing: 4px !important;
+    font-weight: 700 !important;
+  }
+
+  /* "I'm " */
+  .slider-text h1 {
+    color: #7a1f38 !important;
+    font-size: 2.6rem !important;
+    line-height: 1.15 !important;
+    font-weight: 800 !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* "Saher Thekedar" span */
+  .slider-text h1 span {
+    color: #b03060 !important;
+  }
+
+  /* "Data & AI Engineer · Analyst · QA" paragraph */
+  .slider-text p,
+  .one-forth .text > p {
+    color: #8b2040 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+  }
+
+  /* Typing animation */
+  #typing-animation {
+    color: #7a1f38 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+  }
+
+  /* Soft radial glow behind text */
+  .one-forth::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,197,203,0.45) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+}
+/* ══════════════════════════════════════════════ */
 
 /* Owl nav / dots */
 .owl-carousel { position: relative; }
@@ -414,7 +538,6 @@ a:hover { text-decoration: none; }
 }
 .block-20:hover:after { background: rgba(255,197,203,.15); }
 
-/* Zoom effect on project images */
 .zoom-effect {
   overflow: hidden;
   transition: transform 0.3s ease-out;
@@ -519,7 +642,7 @@ a:hover { text-decoration: none; }
   100% { stroke-dasharray: 89,200; stroke-dashoffset: -136px; }
 }
 
-/* ─── PROGRESS BARS (general Bootstrap override) ─ */
+/* ─── PROGRESS BARS ─────────────────────────── */
 .progress { height: .7rem; border-radius: 0; background-color: #f0f0f0; }
 .progress-bar { background-color: #ffc5cb; }
 
@@ -529,22 +652,10 @@ a:hover { text-decoration: none; }
   background: #fff;
   border-radius: 5px;
 }
-
-/* Image fluid rounded */
 .b-shadow-a { box-shadow: 0 6px 20px rgba(0,0,0,.12); }
-
-/* Section bg override */
 .bg-light  { background: #fafafa !important; }
 .ftco-bg-dark { background: #f5f5f5; }
 
-/* Responsive spacing */
 @media (max-width: 767.98px) {
-  .one-forth .text {
-    padding: 2em 1em;
-    max-width: 100%;
-  }
-  .owl-carousel.home-slider,
-  .owl-carousel.home-slider .slider-item,
-  .slider-text { height: 600px; }
   .blog-entry { margin-bottom: 20px; }
 }
