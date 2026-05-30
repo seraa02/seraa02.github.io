@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Saher Thekedar — Data & AI Professional">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -14,139 +17,445 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-  /* ═══════════════════════════════════════════
-     PINK THEME — exact #ffc5cb from style.css
-  ═══════════════════════════════════════════ */
-
-  /* ── Fix hero bg_1.jpg: style.css sets z-index:-1 which hides it ── */
-  .one-third {
-    z-index: 0 !important;
-    background-color: #fde8ed;
+  /* ═══════════════════════════════════
+     FONTS
+  ═══════════════════════════════════ */
+  body {
+    font-family: 'DM Sans', sans-serif !important;
   }
-  .one-third.js-fullheight { min-height: 750px; height: 750px; }
-  .one-forth { z-index: 2 !important; }
+  h1, h2, h3, .navbar-brand, .slider-text h1 {
+    font-family: 'Playfair Display', serif !important;
+  }
+  .subheading, .position, .proj-tags .badge, .contact-label,
+  .mobile-bottom-nav ul li a, .btn, .resume-wrap .date {
+    font-family: 'DM Sans', sans-serif !important;
+  }
 
-  /* ── Hide skill percentages, keep bars ── */
-  .skill-mf .pull-right { display: none; }
+  /* ═══════════════════════════════════
+     NAVBAR — desktop, frosted glass
+  ═══════════════════════════════════ */
+  @media (min-width: 992px) {
+    #ftco-navbar {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      background: rgba(255,255,255,0.95) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(255,197,203,0.35) !important;
+      padding: 10px 0 !important;
+      z-index: 9998 !important;
+      box-shadow: 0 2px 20px rgba(255,197,203,0.2) !important;
+      margin-top: 0 !important;
+    }
+    #ftco-navbar .navbar-brand {
+      font-family: 'Playfair Display', serif !important;
+      font-weight: 900 !important;
+      font-size: 20px !important;
+      color: #111 !important;
+      letter-spacing: -0.5px;
+    }
+    #ftco-navbar .nav-item > .nav-link span {
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 2px !important;
+      text-transform: uppercase !important;
+      color: #555 !important;
+      transition: color 0.2s !important;
+    }
+    #ftco-navbar .nav-item > .nav-link:hover span,
+    #ftco-navbar .nav-item.active > .nav-link span {
+      color: #ffc5cb !important;
+    }
+    /* Push all page content down so it's not hidden under the fixed navbar */
+    body { padding-top: 58px; }
+  }
 
-  /* ── Tighten spacing ── */
-  .ftco-section { padding: 4.5em 0; }
+  /* ═══════════════════════════════════
+     HERO — DESKTOP
+     Strategy: hero section itself becomes
+     a full-viewport background using bg_1.jpg,
+     text sits on the left with a white fade.
+     This bypasses all the .one-third z-index
+     and positioning fights entirely.
+  ═══════════════════════════════════ */
+
+  /* Make the whole hero section full-height with the image */
+  #home-section {
+    min-height: 100vh;
+    position: relative;
+    background-color: #fff8f9;
+  }
+
+  /* Hide the broken owl carousel structure on desktop,
+     we'll use the section background directly */
+  @media (min-width: 992px) {
+    .owl-carousel.home-slider,
+    .owl-carousel.home-slider .slider-item {
+      height: 100vh !important;
+      min-height: 700px !important;
+    }
+    .slider-text {
+      height: 100vh !important;
+      min-height: 700px !important;
+    }
+
+    /* Image panel — right 60%, full height, bg_1.jpg */
+    .one-third {
+      z-index: 0 !important;
+      position: relative !important;
+      width: 60% !important;
+      min-height: 700px !important;
+      height: 100vh !important;
+      background-size: cover !important;
+      background-position: center top !important;
+      background-repeat: no-repeat !important;
+      background-color: #fde8ed !important;
+      /* NO background-image here — it's set inline on the element */
+      order: 2 !important;
+      flex-shrink: 0 !important;
+    }
+    /* Soft fade on the left edge of the image so it blends into text area */
+    .one-third::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 180px;
+      background: linear-gradient(to right, #fff8f9 0%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .one-third .overlay { opacity: 0 !important; }
+
+    /* Text panel — absolutely positioned over the row, vertically centered */
+    .one-forth {
+      position: absolute !important;
+      top: 0 !important; left: 0 !important;
+      bottom: 0 !important;
+      width: 48% !important;
+      right: auto !important;
+      z-index: 3 !important;
+      display: flex !important;
+      align-items: center !important;
+      background: transparent !important;
+      padding: 0 !important;
+      /* Subtle white background so text is always readable over any bleed */
+      background: linear-gradient(to right, rgba(255,248,249,1) 0%, rgba(255,248,249,0.92) 70%, rgba(255,248,249,0) 100%) !important;
+    }
+    .one-forth .text {
+      position: relative !important;
+      top: auto !important;
+      transform: none !important;
+      max-width: 100% !important;
+      padding-left: 60px !important;
+      padding-right: 40px !important;
+    }
+  }
+
+  /* Hero typography */
+  .slider-text h1 {
+    font-size: 64px !important;
+    font-weight: 900 !important;
+    line-height: 1.05 !important;
+    color: #111 !important;
+    letter-spacing: -1px;
+  }
+  .slider-text h1 span { color: #ffc5cb !important; }
+  .slider-text .subheading {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 5px !important;
+    color: #ffc5cb !important;
+    text-transform: uppercase;
+    margin-bottom: 10px !important;
+    display: block !important;
+  }
+  #typing-animation {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #333 !important;
+  }
+  .one-forth .text p[style] {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #666 !important;
+    letter-spacing: 0.3px;
+    margin-top: 6px !important;
+  }
+
+  /* ═══════════════════════════════════
+     NAVBAR — desktop visible, pinned top
+  ═══════════════════════════════════ */
+  @media (min-width: 992px) {
+    #ftco-navbar {
+      display: flex !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important; right: 0 !important;
+      background: rgba(255,255,255,0.92) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(255,197,203,0.3) !important;
+      padding: 10px 0 !important;
+      z-index: 9998 !important;
+      box-shadow: 0 2px 20px rgba(255,197,203,0.2) !important;
+    }
+    #ftco-navbar .navbar-brand {
+      font-family: 'Playfair Display', serif !important;
+      font-weight: 900 !important;
+      font-size: 22px !important;
+      color: #111 !important;
+      letter-spacing: -0.5px;
+    }
+    #ftco-navbar .nav-item > .nav-link {
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 2px !important;
+      text-transform: uppercase !important;
+      color: #555 !important;
+      padding: 8px 16px !important;
+      transition: color 0.2s !important;
+    }
+    #ftco-navbar .nav-item > .nav-link:hover,
+    #ftco-navbar .nav-item.active > .nav-link {
+      color: #ffc5cb !important;
+    }
+    /* Push hero content down so it's not under the navbar */
+    #home-section { padding-top: 60px; }
+  }
+  .heading-section h2 {
+    font-size: 36px !important;
+    font-weight: 900 !important;
+    color: #111 !important;
+    letter-spacing: -0.5px;
+  }
+  .heading-section h1.big,
+  .heading-section h1.big-2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 8vw !important;
+    color: rgba(0,0,0,.04) !important;
+    font-weight: 900 !important;
+  }
+  .big-4 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #111 !important;
+    letter-spacing: -0.3px;
+  }
+  .underline {
+    width: 50px; height: 3px;
+    background: #ffc5cb;
+    border-radius: 2px;
+    margin: 8px 0 20px 0;
+  }
+
+  /* ═══════════════════════════════════
+     ABOUT SECTION
+  ═══════════════════════════════════ */
+  .ftco-section { padding: 5em 0; }
   .ftco-about.ftco-section { padding-bottom: 0; }
-  #resume-section { background: #fff8f9; padding-bottom: 3em; }
-  #project-section { background: #fffbfc; }
-  .resume-wrap {
-    border-left: 3px solid #ffc5cb !important;
-    background: #fff8f9 !important;
-    padding: 20px 24px !important;
-    margin-bottom: 20px !important;
-  }
-  .resume-wrap ul { margin-top: 8px; }
-  .resume-wrap ul li { margin-bottom: 4px; font-size: 13.5px; }
 
-  /* ── 3-col experience: tighter on desktop ── */
-  .exp-col { padding-left: 10px; padding-right: 10px; }
-
-  /* ── Education: force title to one line ── */
-  .resume-wrap h2 { font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-  /* ── About photo: full bleed, well-framed ── */
   .about-photo-wrap {
-    width: 100%;
-    height: 100%;
-    min-height: 420px;
-    border-radius: 12px;
+    width: 100%; height: 100%;
+    min-height: 480px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(255,197,203,0.45);
+    box-shadow: 0 20px 60px rgba(255,197,203,0.5);
     position: relative;
   }
   .about-photo-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    border-radius: 12px;
-    transition: transform 0.4s ease;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: block; border-radius: 16px;
+    transition: transform 0.5s ease;
   }
-  .about-photo-wrap:hover img { transform: scale(1.03); }
+  .about-photo-wrap:hover img { transform: scale(1.04); }
   .about-photo-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    border: 2px solid rgba(255,197,203,0.5);
+    content: ''; position: absolute; inset: 0;
+    border-radius: 16px;
+    border: 2px solid rgba(255,197,203,0.6);
     pointer-events: none;
   }
 
-  /* ── Project card banners ── */
+  /* About text */
+  .ftco-about .col-lg-7 h2 {
+    font-size: 36px !important;
+    font-weight: 900 !important;
+  }
+  .ftco-about p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #444;
+    font-weight: 400;
+  }
+  .ftco-about p em { color: #c9506e; font-style: normal; font-weight: 600; }
+  .ftco-about ul.about-info li span:first-child {
+    font-weight: 700 !important;
+    color: #111 !important;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .ftco-about ul.about-info li span:last-child {
+    font-size: 14px;
+    color: #555;
+  }
+  .counter-wrap .text p {
+    font-size: 18px !important;
+    font-weight: 500;
+  }
+  .counter-wrap .text p span.number {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 48px !important;
+    font-weight: 900 !important;
+    color: #ffc5cb !important;
+  }
+
+  /* ═══════════════════════════════════
+     RESUME SECTION
+  ═══════════════════════════════════ */
+  #resume-section { background: #fff8f9; padding-bottom: 3em; }
+
+  .resume-wrap {
+    border-left: 4px solid #ffc5cb !important;
+    background: #fff !important;
+    padding: 24px 28px !important;
+    margin-bottom: 20px !important;
+    border-radius: 0 12px 12px 0 !important;
+    box-shadow: 0 4px 24px rgba(255,197,203,0.15) !important;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .resume-wrap:hover {
+    box-shadow: 0 8px 32px rgba(255,197,203,0.35) !important;
+    transform: translateY(-2px);
+  }
+  .resume-wrap .date {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffc5cb !important;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+  .resume-wrap h2 {
+    font-size: 19px !important;
+    font-weight: 900 !important;
+    color: #111 !important;
+    margin-bottom: 4px;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+  }
+  .resume-wrap .position {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c9506e !important;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .resume-wrap ul { padding-left: 16px; margin-top: 8px; }
+  .resume-wrap ul li {
+    font-size: 13.5px;
+    color: #555;
+    margin-bottom: 5px;
+    line-height: 1.65;
+  }
+  .exp-col { padding-left: 10px; padding-right: 10px; }
+
+  /* ═══════════════════════════════════
+     PROJECTS SECTION
+  ═══════════════════════════════════ */
+  #project-section { background: #fffbfc; }
+  .proj-row-gap { margin-bottom: 28px; }
+
+  .blog-entry {
+    display: flex; flex-direction: column;
+    background: #fff; width: 100%;
+    box-shadow: 0 4px 24px rgba(255,197,203,0.15);
+    border-radius: 12px; overflow: hidden;
+    margin-bottom: 0;
+    transition: transform .25s ease, box-shadow .25s ease;
+    border: 1px solid rgba(255,197,203,0.2);
+  }
+  .blog-entry:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(255,197,203,0.45);
+  }
+  .blog-entry .text { padding: 18px 20px 20px; flex: 1; }
+
+  /* Project title in pink */
+  .blog-entry .text .heading {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .blog-entry .text .heading a {
+    color: #c9506e !important;
+    transition: color 0.2s;
+  }
+  .blog-entry .text .heading a:hover { color: #9e3055 !important; }
+  .blog-entry .text p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  /* Project banners */
   .proj-banner {
-    height: 190px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
     transition: transform .35s ease;
     text-decoration: none !important;
-    border-radius: 8px 8px 0 0;
+    border-radius: 0;
   }
-  .proj-banner:hover { transform: scale(1.04); }
+  .proj-banner:hover { transform: scale(1.03); }
   .proj-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.18) 0%, transparent 55%),
                 radial-gradient(circle at 75% 25%, rgba(255,255,255,0.10) 0%, transparent 45%);
     z-index: 0;
   }
   .proj-banner .proj-icon {
-    font-size: 52px;
+    font-size: 54px;
     color: rgba(255,255,255,0.93);
     z-index: 1;
-    text-shadow: 0 3px 18px rgba(0,0,0,0.15);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.2);
     transition: transform .3s ease;
   }
-  .proj-banner:hover .proj-icon { transform: scale(1.14); }
-
-  /* ── Project card overlay hover effect ── */
+  .proj-banner:hover .proj-icon { transform: scale(1.15); }
   .proj-banner .proj-hover-overlay {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: rgba(0,0,0,0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     z-index: 2;
     transition: background 0.3s ease;
-    border-radius: 8px 8px 0 0;
   }
-  .proj-banner:hover .proj-hover-overlay {
-    background: rgba(0,0,0,0.28);
-  }
+  .proj-banner:hover .proj-hover-overlay { background: rgba(0,0,0,0.25); }
   .proj-hover-overlay .proj-hover-text {
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    opacity: 0;
-    transform: translateY(8px);
+    color: #fff; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    opacity: 0; transform: translateY(8px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: rgba(255,197,203,0.25);
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.35);
+    display: flex; align-items: center; gap: 7px;
+    background: rgba(255,197,203,0.3);
+    padding: 8px 20px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.4);
     backdrop-filter: blur(4px);
   }
-  .proj-banner:hover .proj-hover-text {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .proj-banner:hover .proj-hover-text { opacity: 1; transform: translateY(0); }
 
-  /* all gradients from the #ffc5cb pink family */
   .grad-stock    { background: linear-gradient(135deg, #e8849a 0%, #c9506e 100%); }
   .grad-lumber   { background: linear-gradient(135deg, #d4607a 0%, #9e3055 100%); }
   .grad-airbnb   { background: linear-gradient(135deg, #e89aaa 0%, #d4607a 100%); }
@@ -157,33 +466,178 @@
   .grad-cricket  { background: linear-gradient(135deg, #d88898 0%, #b85878 100%); }
   .grad-retail   { background: linear-gradient(135deg, #cc7090 0%, #a04868 100%); }
 
-  /* ── Tag badges ── */
-  .proj-tags { margin-top: 8px; }
+  /* Tags */
+  .proj-tags { margin-top: 10px; }
   .proj-tags .badge {
-    font-size: 10px; font-weight: 500;
-    margin-right: 3px; margin-bottom: 3px;
-    padding: 4px 8px; border-radius: 12px;
+    font-size: 10px; font-weight: 600;
+    margin-right: 4px; margin-bottom: 4px;
+    padding: 4px 9px; border-radius: 12px;
     background: #fff0f2; color: #c9506e;
     border: 1px solid #ffc5cb;
+    letter-spacing: 0.3px;
   }
 
-  /* ── Card hover ── */
-  .blog-entry { transition: transform .25s ease, box-shadow .25s ease; }
-  .blog-entry:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(255,197,203,0.45); }
-  .blog-entry .text { padding: 16px 18px 18px; }
+  /* "More on GitHub" button */
+  .btn.btn-primary {
+    background: #ffc5cb !important;
+    border: 2px solid #ffc5cb !important;
+    color: #7a1e35 !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px;
+    font-size: 12px !important;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .btn.btn-primary:hover {
+    background: #f08090 !important;
+    border-color: #f08090 !important;
+    color: #fff !important;
+    box-shadow: 0 6px 24px rgba(255,197,203,0.5) !important;
+    transform: translateY(-2px);
+  }
 
-  /* ── About info: keep compact ── */
-  .about-info p { margin-bottom: 6px; }
-  .counter-wrap { margin-top: 1rem !important; }
+  /* ═══════════════════════════════════
+     CONTACT SECTION
+  ═══════════════════════════════════ */
+  #contact-section {
+    background: #fff8f9;
+    border-top: 1px solid #ffe0e5;
+    padding: 70px 0 90px !important;
+  }
+  .contact-inner {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: #ffc5cb; display: block; margin-bottom: 10px;
+  }
+  .contact-inner h3 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 34px !important; font-weight: 900 !important;
+    color: #111; margin-bottom: 8px;
+  }
+  .contact-divider {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, #ffc5cb, #f08090);
+    border-radius: 2px; margin: 0 auto 20px;
+  }
+  .contact-inner > p {
+    font-size: 15px; color: #888; margin-bottom: 36px; line-height: 1.7;
+  }
+  .contact-social-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; align-items: center;
+    justify-content: center; gap: 16px; flex-wrap: wrap;
+  }
+  .contact-social-list li a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 13px 26px; border-radius: 50px;
+    background: #fff; border: 1.5px solid #ffc5cb;
+    color: #c9506e; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.5px; text-decoration: none;
+    transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s;
+    box-shadow: 0 2px 14px rgba(255,197,203,0.2);
+  }
+  .contact-social-list li a i { font-size: 17px; }
+  .contact-social-list li a:hover {
+    background: #ffc5cb; color: #fff;
+    box-shadow: 0 8px 28px rgba(255,197,203,0.55);
+    transform: translateY(-3px); text-decoration: none;
+  }
 
-  /* ── Section row spacing ── */
-  .proj-row-gap { margin-bottom: 24px; }
+  /* ═══════════════════════════════════
+     MOBILE BOTTOM NAV
+  ═══════════════════════════════════ */
+  .mobile-bottom-nav {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    z-index: 9999; background: #fff;
+    border-top: 1.5px solid #ffe0e5;
+    box-shadow: 0 -4px 24px rgba(255,197,203,0.25);
+  }
+  .mobile-bottom-nav ul {
+    display: flex; list-style: none; margin: 0; padding: 0;
+  }
+  .mobile-bottom-nav ul li { flex: 1; }
+  .mobile-bottom-nav ul li a {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 8px 4px 10px;
+    color: #ccc; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    text-decoration: none; transition: color 0.2s; gap: 3px;
+  }
+  .mobile-bottom-nav ul li a i { font-size: 18px; }
+  .mobile-bottom-nav ul li a.active,
+  .mobile-bottom-nav ul li a:hover { color: #ffc5cb; text-decoration: none; }
+
+  /* ═══════════════════════════════════
+     MOBILE OVERRIDES (≤991px)
+     Desktop: untouched above this point
+  ═══════════════════════════════════ */
+  @media (max-width: 991.98px) {
+    .mobile-bottom-nav { display: block; }
+    body { padding-bottom: 64px; padding-top: 0 !important; }
+
+    /* Hero: stack text then image */
+    .owl-carousel.home-slider,
+    .owl-carousel.home-slider .slider-item,
+    .slider-text {
+      height: auto !important; min-height: 0 !important; max-height: none !important;
+    }
+    .row.slider-text {
+      flex-direction: column !important;
+      height: auto !important; min-height: 0 !important;
+    }
+    /* Reset desktop absolute positioning */
+    .one-forth {
+      position: relative !important;
+      top: auto !important; left: auto !important;
+      right: auto !important; bottom: auto !important;
+      display: block !important;
+      width: 100% !important;
+      background: #fff8f9;
+      padding: 90px 24px 36px !important;
+      order: 1 !important; z-index: 2 !important;
+      align-items: unset !important;
+    }
+    .one-forth .text {
+      position: relative !important; top: auto !important;
+      transform: none !important;
+      max-width: 100% !important;
+      padding-left: 0 !important; padding-right: 0 !important;
+      text-align: center;
+    }
+    .one-third {
+      position: relative !important; width: 100% !important;
+      height: 56vw !important; min-height: 180px !important;
+      max-height: 310px !important; order: 2 !important;
+      z-index: 1 !important; display: block !important;
+      background-size: cover !important; background-position: center top !important;
+    }
+
+    .one-third .overlay { opacity: 0 !important; }
+    .one-third::before { display: none !important; }
+    .slider-text h1 { font-size: 34px !important; }
+    #typing-animation { font-size: 18px !important; }
+    .owl-carousel.home-slider .owl-dots { display: none; }
+    #ftco-navbar { display: none !important; }
+    /* desktop navbar stays visible via default — no rule needed */
+    .blog-entry { margin-bottom: 20px; }
+  }
+
+  @media (max-width: 479.98px) {
+    .one-forth { padding: 80px 18px 28px !important; }
+    .slider-text h1 { font-size: 28px !important; }
+  }
   </style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-<!-- ══ NAVBAR ══ -->
+<!-- ══ NAVBAR (desktop) ══ -->
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
   <div class="container">
     <a class="navbar-brand" href="index.html">Saher Thekedar</a>
@@ -204,13 +658,24 @@
   </div>
 </nav>
 
+<!-- ══ MOBILE BOTTOM NAV ══ -->
+<nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+  <ul>
+    <li><a href="#home-section"    class="mob-nav-link active" data-section="home-section"><i class="fas fa-home"></i>Home</a></li>
+    <li><a href="#about-section"   class="mob-nav-link"        data-section="about-section"><i class="fas fa-user"></i>About</a></li>
+    <li><a href="#resume-section"  class="mob-nav-link"        data-section="resume-section"><i class="fas fa-file-alt"></i>Resume</a></li>
+    <li><a href="#project-section" class="mob-nav-link"        data-section="project-section"><i class="fas fa-code"></i>Projects</a></li>
+    <li><a href="#contact-section" class="mob-nav-link"        data-section="contact-section"><i class="fas fa-envelope"></i>Contact</a></li>
+  </ul>
+</nav>
+
 <!-- ══ HERO ══ -->
 <section id="home-section" class="hero">
   <div class="home-slider owl-carousel">
     <div class="slider-item">
       <div class="overlay"></div>
       <div class="container">
-        <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end">
+        <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" style="position:relative;">
           <div class="one-third js-fullheight order-md-last img"
                style="background-image: url('images/bg_1.jpg'); background-size: cover; background-position: center top;">
             <div class="overlay"></div>
@@ -218,8 +683,8 @@
           <div class="one-forth d-flex align-items-center ftco-animate">
             <div class="text">
               <span class="subheading">Howdy!</span>
-              <h1 class="mb-2 mt-3">I'm <span>Saher Thekedar</span></h1>
-              <p style="font-size:16px; font-weight:500; color:#555; margin-bottom:6px;">Data &amp; AI Engineer &nbsp;·&nbsp; Analyst &nbsp;·&nbsp; QA</p>
+              <h1 class="mb-2 mt-3">I'm <span>Saher<br>Thekedar</span></h1>
+              <p style="font-size:15px; font-weight:500; color:#666; margin-bottom:8px; letter-spacing:0.3px;">Data &amp; AI Engineer &nbsp;·&nbsp; Analyst &nbsp;·&nbsp; QA</p>
               <span id="typing-animation"></span>
               <br><br>
             </div>
@@ -234,29 +699,25 @@
 <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
   <div class="container">
     <div class="row d-flex align-items-stretch">
-
-      <!-- Left: full photo -->
       <div class="col-md-6 col-lg-5 d-flex mb-4 mb-md-0">
         <div class="about-photo-wrap">
           <img src="images/about-me.png" alt="Saher Thekedar">
         </div>
       </div>
-
-      <!-- Right: bio -->
       <div class="col-md-6 col-lg-7 pl-lg-5 pb-4">
         <div class="row justify-content-start pb-2">
           <div class="col-md-12 heading-section ftco-animate">
             <h1 class="big">About</h1>
             <h2 class="mb-3">About Me</h2>
-            <p>I'm a Data &amp; AI Engineer with an MS in Data Science from Texas A&amp;M University, built on a Bachelor's in Artificial Intelligence &amp; Data Science. Also an Aggie🤠</p>
-            <p>I work at the intersection of data engineering, applied AI, and product thinking. What drives me is taking a problem and turning it into something people can actually use — a pipeline that just runs, a dashboard that tells a story, a model that makes a real decision easier. I've built across healthcare, research, and analytics, and the same thread runs through all of it: closing the gap between what data <em>can</em> say and what people <em>need</em> to hear.</p>
-            <p>I think like an engineer and communicate like a product person. I tend to put myself in the other person's shoes — constantly asking whether something makes sense to whoever's on the receiving end, whether there's an edge case I'm missing, and whether I can make a tool feel less like software and more like it just <em>works</em>. That mindset pushes me to ship end-to-end: wrangling messy data, designing pipelines, and building interfaces non-technical users actually want to open. Privacy-constrained environments, real stakes, real users — that's where I do my best work.</p>
-            <p>And I love this era of building. With AI being able to go from idea to working product in days is exactly why I love this field.</p>
+            <p>I'm a <strong>Data &amp; AI Engineer</strong> with an MS in Data Science from <strong>Texas A&amp;M University</strong>, built on a Bachelor's in Artificial Intelligence &amp; Data Science. Also an Aggie&nbsp;🤠</p>
+            <p>I work at the intersection of <em>data engineering</em>, <em>applied AI</em>, and <em>product thinking</em>. What drives me is taking a problem and turning it into something people can actually use — a pipeline that just runs, a dashboard that tells a story, a model that makes a real decision easier.</p>
+            <p>I think like an engineer and communicate like a product person — constantly asking whether something makes sense to whoever's on the receiving end, whether there's an edge case I'm missing, and whether I can make a tool feel less like software and more like it just <em>works</em>.</p>
+            <p>Privacy-constrained environments, real stakes, real users — that's where I do my best work. And I love this era of building.</p>
             <ul class="about-info mt-3 px-md-0 px-2">
               <li class="d-flex"><span>Profile:</span><span>Data &amp; AI Engineer · Analyst · QA</span></li>
               <li class="d-flex"><span>Education:</span><span>MS Data Science (Texas A&amp;M)</span></li>
               <li class="d-flex"><span>Language:</span><span>English, Hindi</span></li>
-              <li class="d-flex"><span>Fun Facts:</span><span> Always Planning the Next Trip(weekends only) · TV series binge-watcher · coffee + curiosity + collaboration </span></li>
+              <li class="d-flex"><span>Fun Facts:</span><span>Always Planning the Next Trip · TV binge-watcher · coffee + curiosity</span></li>
             </ul>
           </div>
         </div>
@@ -277,7 +738,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -292,56 +752,45 @@
       </div>
     </div>
 
-    <!-- Experience header -->
     <div class="row mb-2"><h1 class="big-4">Experience</h1><div class="underline"></div></div>
-
-    <!-- All 3 experience cards in one row -->
     <div class="row">
-
-      <!-- 1. BurstIQ — FIRST -->
       <div class="col-md-4 exp-col">
         <div class="resume-wrap ftco-animate">
           <span class="date">May 2025 – May 2026</span>
           <h2>Data Engineer</h2>
           <span class="position">Texas A&amp;M Health – BurstIQ</span>
           <ul>
-            <li>Developed Lifegraph React application modules; wireframed 20+ UI/UX flows in Figma, integrated REST APIs, and conducted QA testing to resolve data inconsistencies.</li>
-            <li>Built Power BI dashboards for pharmacogenomic (PGx) analysis, transforming genetic variant and medication response data across 220+ participants into decision-ready insights for clinicians.</li>
-            <li>Converted unstructured medical PDFs into structured, query-ready datasets using a local LLM pipeline (Ollama), ensuring end-to-end data privacy.</li>
-            <li>Processed and analyzed Actigraph wearable device data — accelerometry and sleep metrics across research participants — building automated pipelines to extract clinically meaningful activity patterns for health outcome studies.</li>
+            <li>Developed Lifegraph React application modules; wireframed 20+ UI/UX flows in Figma, integrated REST APIs, and conducted QA testing.</li>
+            <li>Built <strong>Power BI dashboards</strong> for pharmacogenomic (PGx) analysis across 220+ participants into decision-ready insights.</li>
+            <li>Converted unstructured medical PDFs into structured datasets using a <strong>local LLM pipeline (Ollama)</strong>, ensuring end-to-end data privacy.</li>
+            <li>Processed Actigraph wearable device data — accelerometry and sleep metrics — building automated pipelines for health outcome studies.</li>
           </ul>
         </div>
       </div>
-
-      <!-- 2. PPRI -->
       <div class="col-md-4 exp-col">
         <div class="resume-wrap ftco-animate">
           <span class="date">Jan 2026 – May 2026</span>
           <h2>Research Data Engineer</h2>
           <span class="position">Texas A&amp;M University – PPRI</span>
           <ul>
-            <li>Digitized 10K+ bilingual (Eng/Spa) handwritten forms using a multi-stage OCR + vision LLM pipeline (Tesseract, Qwen via Hugging Face) on HPC servers — zero data left the machine, manual entry reduced 70%.</li>
-            <li>Designed program evaluation dashboards and Qualtrics survey instruments for 5 ACL-funded older adult health programs across Texas for federal reporting.</li>
+            <li>Digitized <strong>10K+ bilingual</strong> handwritten forms using a multi-stage OCR + vision LLM pipeline on HPC servers — manual entry reduced <strong>70%</strong>.</li>
+            <li>Designed program evaluation dashboards and Qualtrics survey instruments for 5 ACL-funded older adult health programs across Texas.</li>
           </ul>
         </div>
       </div>
-
-      <!-- 3. Glow Story -->
       <div class="col-md-4 exp-col">
         <div class="resume-wrap ftco-animate">
           <span class="date">Jan 2024 – Jun 2024</span>
           <h2>Data Analyst Intern</h2>
           <span class="position">The Glow Story Neon</span>
           <ul>
-            <li>Analyzed weekly sales data across 20+ product SKUs to identify underperforming variants and revenue concentration patterns, directly driving promotional prioritization decisions.</li>
-            <li>Synthesized campaign KPIs and funnel metrics into executive Streamlit dashboards — contributed to a 25% lift in customer acquisition.</li>
+            <li>Analyzed weekly sales data across <strong>20+ product SKUs</strong> to identify underperforming variants and revenue concentration patterns.</li>
+            <li>Synthesized campaign KPIs into executive Streamlit dashboards — contributed to a <strong>25% lift</strong> in customer acquisition.</li>
           </ul>
         </div>
       </div>
-
     </div>
 
-    <!-- Education -->
     <div class="row mt-4 mb-2"><h1 class="big-4">Education</h1><div class="underline"></div></div>
     <div class="row">
       <div class="col-md-6">
@@ -349,7 +798,7 @@
           <span class="date">Aug 2024 – May 2026</span>
           <h2>MS in Data Science — Statistics Track</h2>
           <span class="position">Texas A&amp;M University, Texas, USA</span>
-          <p class="mt-2 mb-0" style="font-size:13px;">GPA: 3.6 / 4.0</p>
+          <p class="mt-2 mb-0" style="font-size:13px; color:#888;">GPA: <strong>3.6 / 4.0</strong></p>
         </div>
       </div>
       <div class="col-md-6">
@@ -357,11 +806,10 @@
           <span class="date">Aug 2020 – Jun 2024</span>
           <h2>B.E. in Artificial Intelligence &amp; Data Science</h2>
           <span class="position">University of Mumbai, India</span>
-          <p class="mt-2 mb-0" style="font-size:13px;">GPA: 3.5 / 4.0</p>
+          <p class="mt-2 mb-0" style="font-size:13px; color:#888;">GPA: <strong>3.5 / 4.0</strong></p>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -372,222 +820,161 @@
       <div class="col-md-7 heading-section text-center ftco-animate">
         <h1 class="big big-2">Projects</h1>
         <h2 class="mb-3">Projects</h2>
-        <p>A collection of work across data engineering, machine learning, analytics, and product — from coursework to live deployed tools.</p>
+        <p style="font-size:15px; color:#888;">Data engineering, machine learning, analytics, and product — from coursework to live deployed tools.</p>
       </div>
     </div>
 
     <!-- Row 1 -->
     <div class="row d-flex proj-row-gap">
-
-      <!-- Dominick's Retail DWH — FIRST, 2025 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
+        <div class="blog-entry">
           <a href="https://github.com/seraa02/dominick-retail-datawarehouse" target="_blank" class="proj-banner grad-retail">
             <i class="fas fa-store proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/seraa02/dominick-retail-datawarehouse" target="_blank">Dominick's Retail Data Warehouse (2025)</a></h3>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/seraa02/dominick-retail-datawarehouse" target="_blank">Dominick's Retail Data Warehouse</a></h3>
             <p>Kimball star schema DWH via SSIS ETL ingesting 1M+ weekly sales records across 100 stores and 5 years. Hypothesis testing on promotion lift + 10 KPIs via SQL window functions.</p>
-            <div class="proj-tags">
-              <span class="badge">SQL Server</span><span class="badge">SSIS</span><span class="badge">Star Schema</span><span class="badge">Hypothesis Testing</span>
-            </div>
+            <div class="proj-tags"><span class="badge">SQL Server</span><span class="badge">SSIS</span><span class="badge">Star Schema</span><span class="badge">Hypothesis Testing</span></div>
           </div>
         </div>
       </div>
-
-      <!-- Airbnb 2025 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
+        <div class="blog-entry">
           <a href="https://github.com/seraa02/airbnb_data_engineering" target="_blank" class="proj-banner grad-airbnb">
             <i class="fas fa-database proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/seraa02/airbnb_data_engineering" target="_blank">Airbnb End-to-End Data Platform (2025)</a></h3>
-            <p>Incremental loads from S3 into Snowflake via Airflow DAGs with Medallion architecture (Bronze–Silver–Gold), SCD Type 2 snapshots, and Great Expectations quality checks. dbt transformations surfaced booking trends and seasonal pricing patterns.</p>
-            <div class="proj-tags">
-              <span class="badge">Airflow</span><span class="badge">Snowflake</span><span class="badge">dbt</span><span class="badge">AWS S3</span><span class="badge">Great Expectations</span>
-            </div>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/seraa02/airbnb_data_engineering" target="_blank">Airbnb End-to-End Data Platform</a></h3>
+            <p>Incremental loads from S3 into Snowflake via Airflow DAGs with Medallion architecture, SCD Type 2 snapshots, and Great Expectations quality checks. dbt transformations surfaced booking trends.</p>
+            <div class="proj-tags"><span class="badge">Airflow</span><span class="badge">Snowflake</span><span class="badge">dbt</span><span class="badge">AWS S3</span><span class="badge">Great Expectations</span></div>
           </div>
         </div>
       </div>
-
-      <!-- Stock Market 2025 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
+        <div class="blog-entry">
           <a href="https://github.com/seraa02/stock-market-prediction-dashbaord" target="_blank" class="proj-banner grad-stock">
             <i class="fas fa-chart-line proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fas fa-external-link-alt"></i> Live Demo</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fas fa-external-link-alt"></i> Live Demo</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/seraa02/stock-market-prediction-dashbaord" target="_blank">Stock Market Forecasting Dashboard (2025)</a></h3>
-            <p>R Shiny app forecasting any stock ticker using ARIMAX (volume as exogenous), Naive, and XGBoost. Live KPI cards, spider confidence chart, model comparison. Dockerized and deployed on Render.</p>
-            <div class="proj-tags">
-              <span class="badge">R Shiny</span><span class="badge">ARIMAX</span><span class="badge">XGBoost</span><span class="badge">Docker</span><span class="badge">quantmod</span>
-            </div>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/seraa02/stock-market-prediction-dashbaord" target="_blank">Stock Market Forecasting Dashboard</a></h3>
+            <p>R Shiny app forecasting any stock ticker using ARIMAX, Naive, and XGBoost. Live KPI cards, spider confidence chart, model comparison. Dockerized and deployed on Render.</p>
+            <div class="proj-tags"><span class="badge">R Shiny</span><span class="badge">ARIMAX</span><span class="badge">XGBoost</span><span class="badge">Docker</span><span class="badge">quantmod</span></div>
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Row 2 -->
     <div class="row d-flex proj-row-gap">
-
-      <!-- Lumber 2025 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
+        <div class="blog-entry">
           <a href="https://github.com/anidude09/ai-mill-tool" target="_blank" class="proj-banner grad-lumber">
             <i class="fas fa-truck proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fas fa-external-link-alt"></i> Live Demo</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fas fa-external-link-alt"></i> Live Demo</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/anidude09/ai-mill-tool" target="_blank">Lumber Supply Chain — Freight Intelligence (2025)</a></h3>
-            <p>Interactive Streamlit dashboard across three views: Freight Lane Analysis (carrier cost/mile, DAT index comparisons), Mill Delivered Cost KPIs (cost/MBF, RL benchmarks, gross-margin health), and Random Lengths Trends. Merged 10,000+ records across LaneOne + American Lumber datasets. Live on Streamlit Cloud.</p>
-            <div class="proj-tags">
-              <span class="badge">Streamlit</span><span class="badge">Python</span><span class="badge">SQL</span><span class="badge">Pandas</span><span class="badge">Supply Chain</span>
-            </div>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/anidude09/ai-mill-tool" target="_blank">Lumber Supply Chain — Freight Intelligence</a></h3>
+            <p>Streamlit dashboard across Freight Lane Analysis, Mill Delivered Cost KPIs, and Random Lengths Trends. Merged 10,000+ records across LaneOne + American Lumber datasets.</p>
+            <div class="proj-tags"><span class="badge">Streamlit</span><span class="badge">Python</span><span class="badge">SQL</span><span class="badge">Pandas</span><span class="badge">Supply Chain</span></div>
           </div>
         </div>
       </div>
-
-      <!-- Vaccine Networks 2025 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
+        <div class="blog-entry">
           <a href="https://github.com/seraa02/covid-vaccine-spatial-network2" target="_blank" class="proj-banner grad-vaccine">
             <i class="fas fa-project-diagram proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/seraa02/covid-vaccine-spatial-network" target="_blank">Spatial Vaccination Networks (2025)</a></h3>
-            <p>County-level adjacency graph (~3,100 nodes, ~30,000 edges) from CDC + Census data. Network-aware forecasting cut RMSE from 11.4 → 7.5 vs baseline. 8-module interactive Shiny dashboard + GNN-ready dataset exported.</p>
-            <div class="proj-tags">
-              <span class="badge">R</span><span class="badge">igraph</span><span class="badge">Shiny</span><span class="badge">Spatial Analysis</span><span class="badge">GNN</span>
-            </div>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/seraa02/covid-vaccine-spatial-network" target="_blank">Spatial Vaccination Networks</a></h3>
+            <p>County-level adjacency graph (~3,100 nodes, ~30,000 edges) from CDC + Census data. Network-aware forecasting cut RMSE from 11.4 → 7.5 vs baseline.</p>
+            <div class="proj-tags"><span class="badge">R</span><span class="badge">igraph</span><span class="badge">Shiny</span><span class="badge">Spatial Analysis</span><span class="badge">GNN</span></div>
           </div>
         </div>
       </div>
-
-      <!-- Credit Card 2025 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
+        <div class="blog-entry">
           <a href="https://github.com/seraa02/credit-card-spending-forecasting" target="_blank" class="proj-banner grad-credit">
             <i class="fas fa-credit-card proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/seraa02/credit-card-spending-forecasting" target="_blank">Credit Card Spending Forecasting (2025)</a></h3>
-            <p>LSTM (R²=0.45) vs Meta Prophet (R²=0.65) on 1M+ transactions across 900+ customers. Engineered holiday, payday, and one-hot features. Prototype budget recommendation tool built on Prophet output.</p>
-            <div class="proj-tags">
-              <span class="badge">LSTM</span><span class="badge">Prophet</span><span class="badge">PyTorch</span><span class="badge">Python</span><span class="badge">FinTech</span>
-            </div>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/seraa02/credit-card-spending-forecasting" target="_blank">Credit Card Spending Forecasting</a></h3>
+            <p>LSTM (R²=0.45) vs Meta Prophet (R²=0.65) on 1M+ transactions across 900+ customers. Engineered holiday, payday, and one-hot features.</p>
+            <div class="proj-tags"><span class="badge">LSTM</span><span class="badge">Prophet</span><span class="badge">PyTorch</span><span class="badge">Python</span><span class="badge">FinTech</span></div>
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Row 3 -->
     <div class="row d-flex proj-row-gap">
-
-      <!-- Fitbit 2025 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
+        <div class="blog-entry">
           <a href="https://github.com/seraa02/fitbit-unified-health-dashboard" target="_blank" class="proj-banner grad-fitbit">
             <i class="fas fa-heartbeat proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fas fa-external-link-alt"></i> Live Demo</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fas fa-external-link-alt"></i> Live Demo</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/seraa02/fitbit-unified-health-dashboard" target="_blank">Fitbit Unified Health Dashboard (2025)</a></h3>
-            <p>Dual-view fitness dashboard — personal tracking vs top performer benchmarking across daily, weekly, and monthly views. Vega-Lite + JavaScript + ML-powered imputation. 97% user accuracy match. Live on GitHub Pages.</p>
-            <div class="proj-tags">
-              <span class="badge">Vega-Lite</span><span class="badge">JavaScript</span><span class="badge">ML Imputation</span><span class="badge">GitHub Pages</span>
-            </div>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/seraa02/fitbit-unified-health-dashboard" target="_blank">Fitbit Unified Health Dashboard</a></h3>
+            <p>Dual-view fitness dashboard — personal tracking vs top performer benchmarking across daily, weekly, and monthly views. Vega-Lite + JS + ML-powered imputation.</p>
+            <div class="proj-tags"><span class="badge">Vega-Lite</span><span class="badge">JavaScript</span><span class="badge">ML Imputation</span><span class="badge">GitHub Pages</span></div>
           </div>
         </div>
       </div>
-
-      <!-- CIFAR-10 2024 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
+        <div class="blog-entry">
           <a href="https://github.com/seraa02/CIFAR10-Image-Classification" target="_blank" class="proj-banner grad-cifar">
             <i class="fas fa-brain proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/seraa02/CIFAR10-Image-Classification" target="_blank">Image Classification on CIFAR-10 (2024)</a></h3>
-            <p>CNN (75%), ResNet-18 + SVM hybrid (86%), ResNet-34 (95%) on 60K images across 10 classes. Includes saliency maps, hyperparameter tuning, and live website on Netlify.</p>
-            <div class="proj-tags">
-              <span class="badge">PyTorch</span><span class="badge">ResNet-34</span><span class="badge">SVM</span><span class="badge">Python</span><span class="badge">Computer Vision</span>
-            </div>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/seraa02/CIFAR10-Image-Classification" target="_blank">Image Classification on CIFAR-10</a></h3>
+            <p>CNN (75%), ResNet-18 + SVM hybrid (86%), ResNet-34 (95%) on 60K images across 10 classes. Saliency maps, hyperparameter tuning, live site on Netlify.</p>
+            <div class="proj-tags"><span class="badge">PyTorch</span><span class="badge">ResNet-34</span><span class="badge">SVM</span><span class="badge">Python</span><span class="badge">Computer Vision</span></div>
           </div>
         </div>
       </div>
-
-      <!-- Cricket 2024 -->
       <div class="col-md-4 d-flex ftco-animate">
-        <div class="blog-entry justify-content-end">
-          <a href="https://github.com/seraa02" target="_blank" class="proj-banner grad-cricket">
+        <div class="blog-entry">
+          <a href="https://github.com/seraa02/crickett20-analyzer" target="_blank" class="proj-banner grad-cricket">
             <i class="fas fa-trophy proj-icon"></i>
-            <div class="proj-hover-overlay">
-              <span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span>
-            </div>
+            <div class="proj-hover-overlay"><span class="proj-hover-text"><i class="fab fa-github"></i> View Project</span></div>
           </a>
-          <div class="text mt-2 d-block">
-            <h3 class="heading"><a href="https://github.com/seraa02" target="_blank">Cricket Team Analyzer — T20 World Cup (2024)</a></h3>
-            <p>Scraped batting and bowling data for 100+ players from ESPN Cricinfo using BeautifulSoup. 5 role-specific criteria in Power BI with DAX — interactive best-11 builder projecting 180+ avg team score.</p>
-            <div class="proj-tags">
-              <span class="badge">Power BI</span><span class="badge">Web Scraping</span><span class="badge">Python</span><span class="badge">DAX</span><span class="badge">SQL</span>
-            </div>
+          <div class="text">
+            <h3 class="heading"><a href="https://github.com/seraa02/crickett20-analyzer" target="_blank">Cricket Team Analyzer — T20 World Cup</a></h3>
+            <p>Scraped batting and bowling data for 100+ players from ESPN Cricinfo. 5 role-specific criteria in Power BI with DAX — interactive best-11 builder projecting 180+ avg score.</p>
+            <div class="proj-tags"><span class="badge">Power BI</span><span class="badge">Web Scraping</span><span class="badge">Python</span><span class="badge">DAX</span><span class="badge">SQL</span></div>
           </div>
         </div>
       </div>
-
     </div>
 
-    <div class="row justify-content-center mt-2 mb-2">
+    <div class="row justify-content-center mt-3 mb-2">
       <p><a href="https://github.com/seraa02" target="_blank" class="btn btn-primary py-3 px-5">
         <i class="fab fa-github mr-2"></i>More on GitHub
       </a></p>
     </div>
-
   </div>
 </section>
 
 <!-- ══ CONTACT ══ -->
 <section id="contact-section" class="ftco-section ftco-no-pt">
   <div class="container">
-    <br>
-    <ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
-      <li class="ftco-animate normal-txt">Find me on &nbsp;</li>
-      <li class="ftco-animate">
-        <a href="https://www.linkedin.com/in/saherthekedar" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      </li>
-      <li class="ftco-animate">
-        <a href="https://github.com/seraa02" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-      </li>
-      <li class="ftco-animate">
-        <a href="https://www.instagram.com/saher_02/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-      </li>
-    </ul>
-    <br><br>
+    <div class="contact-inner">
+      <span class="contact-label">Let's Connect</span>
+      <h3>Find me on</h3>
+      <div class="contact-divider"></div>
+      <p>Open to opportunities, collaborations, or just a good conversation about data and AI.</p>
+      <ul class="contact-social-list">
+        <li><a href="https://www.linkedin.com/in/saherthekedar" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+        <li><a href="https://github.com/seraa02"                target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+        <li><a href="https://www.instagram.com/saher_02/"       target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -604,5 +991,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="main.js"></script>
+
+<script>
+(function () {
+  var links = document.querySelectorAll('.mob-nav-link');
+  var sections = document.querySelectorAll('section[id]');
+  links.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.getElementById(this.getAttribute('data-section'));
+      if (target) window.scrollTo({ top: target.offsetTop - 8, behavior: 'smooth' });
+      links.forEach(function (l) { l.classList.remove('active'); });
+      this.classList.add('active');
+    });
+  });
+  window.addEventListener('scroll', function () {
+    var scrollY = window.scrollY + 100;
+    var current = '';
+    sections.forEach(function (sec) { if (scrollY >= sec.offsetTop) current = sec.id; });
+    links.forEach(function (link) {
+      link.classList.remove('active');
+      if (link.getAttribute('data-section') === current) link.classList.add('active');
+    });
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
